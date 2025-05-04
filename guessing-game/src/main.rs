@@ -16,7 +16,13 @@ fn main() {
 
 
 
-   let guess_int:i32 = guess.trim().parse().expect("WRONG");
+   let guess_int:i32 = match guess.trim().parse() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Smth goofy happened we going with 8");
+            8
+        },
+   };
 
 
    let mut min:i32 = -500000;
@@ -41,7 +47,7 @@ fn main() {
    if max == min{
     println!("{}",min)
    }
-   println!("Found it! {guess}");
+   println!("Found it! {guess_int}");
 
 
 
