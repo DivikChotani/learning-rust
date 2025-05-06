@@ -20,6 +20,9 @@ fn main(){
     //can also be written as
     let condition = x % 3 == 0; // can also write x % 3 == 0 in the statement directly
     let q = if condition {x * 2} else {1};
+    //one above makes more sense because it's explicitly using if statements to return
+
+
     //if and else arms must have same type
     println!("{t}");
     println!("{q}");
