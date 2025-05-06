@@ -69,6 +69,41 @@ fn main() {
     };
     let element = a[index];
     println!("{element}");
+    another_function(3);
+
+    //not allowed 
+    //let x = let y = 0;
+    //allowed: set variable to block expression — they evaluate to a value
+    // The last expression in a block (without a semicolon) becomes the block’s return value.
+    // A semicolon turns it into a statement, which returns () (unit).
+
+    //eg:
+    let y = {
+        !t
+    };
+    println!("{y} is y");
+
+    let no_ret = five();
+    let ret = five_ret();
+
+    println!("no ret {no_ret} ret {ret}")
 
 }
 
+fn another_function(x: i32){
+    println!("SECONd function");
+}
+
+//You can return early from a function by using the return keyword and specifying a value, 
+// but most functions return the last expression implicitly
+// if using implicit, remember no semi colons for last line (just return explicitly)
+
+//thats how to define return type
+fn five() -> i32 {
+    5
+}
+//equal to
+
+fn five_ret() -> i32 {
+    return 5;
+}
