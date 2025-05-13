@@ -27,6 +27,24 @@ fn main() {
 
    //println!("{}", u1.username);
    //this thows an error
+   let mut l = (2,3, 4);
+
+   let mut k = (2,3,4);
+
+   let t = Color(2,3,4);
+
+   let m: Color = Color(2,3, 4);
+
+   println!("{}", l == k);
+   //this is fine, as long as tuple has same types inside defined and they define equality
+
+   //can not do this, must define equality
+   //println!("{}", t == m);
+
+   let b = AlwaysEqual;
+   //has some use cases
+
+
    
 }
 
@@ -42,6 +60,9 @@ fn build_user(email: Option<&str>, username: Option<&str>) -> User{
 
     
 }
+struct Color(i32, i32, i32);//a tuple struct
+
+struct AlwaysEqual;
 
 struct User {
     active: bool,
