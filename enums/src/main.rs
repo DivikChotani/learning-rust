@@ -77,6 +77,30 @@ enum UsState {
     Wyoming,
 }
 
+//enums can have implementations too
+impl UsState {
+    fn am_i_here(&self) -> bool {
+        //if let statement, if let the pattern to find equals the pattern you are providing
+        let q = if let UsState::California = self {
+                true
+            }
+            else {
+                return false
+            };
+        
+        return q;
+    }
+
+    fn is_it_cold(&self) -> bool {
+        //let else used only for control flow, (i.e., for early return, panic, etc.). 
+        //You cannot assign the result of this pattern match to a variable.
+        let UsState::Alaska = self else {
+            return false
+        };
+        true
+    }
+}
+
 
 enum Coin {
     penny,
@@ -114,6 +138,8 @@ fn main() {
     print_coin(Coin::quarter(UsState::California));
     print_coin(Coin::dime);
 
+    state_info(Coin::quarter(UsState::Alaska));
+
 
 }
 
@@ -150,4 +176,16 @@ fn print_coin(coin : Coin) -> i32{
             10
         } //can have a catch all case here using underscore _
     }
+}
+
+fn state_info(coin: Coin) {
+    //if let binds the variable inside the if block
+    //let ... else binds the variable after the else block, assuming the match succeeded.
+    let Coin::quarter(state) = coin else {
+        return
+    };
+
+    let here = state.am_i_here();
+    let cold = state.is_it_cold();
+    println!("{here}, {cold}");
 }
