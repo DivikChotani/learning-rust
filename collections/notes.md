@@ -75,3 +75,58 @@ let row = vec![
   - As grapheme clusters (user-perceived "letters")
 
 
+## Hash Maps (`HashMap<K, V>`)
+
+### Creating Hash Maps
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
+```
+
+### Accessing Values
+```rust
+let team_name = String::from("Blue");
+let score = scores.get(&team_name).copied().unwrap_or(0);
+```
+
+### Iterating Over Hash Maps
+```rust
+for (key, value) in &scores {
+    println!("{key}: {value}");
+}
+```
+
+### Ownership Rules
+- Types implementing `Copy` trait (like `i32`) are copied into the hash map
+- Owned values (like `String`) are moved, and the hash map becomes the owner
+- If references are inserted, they must remain valid for at least as long as the hash map
+
+### Updating Hash Maps
+1. Overwriting a value:
+```rust
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Blue"), 25); // Value is now 25
+```
+
+2. Only inserting if key doesn't exist:
+```rust
+scores.entry(String::from("Yellow")).or_insert(50);
+```
+
+3. Updating based on old value:
+```rust
+let text = "hello world wonderful world";
+let mut map = HashMap::new();
+
+for word in text.split_whitespace() {
+    let count = map.entry(word).or_insert(0);
+    *count += 1;
+}
+```
+
+### Hashing Function
+- Default: SipHash (provides DoS attack resistance)
+- Can be customized by implementing the `BuildHasher` trait
